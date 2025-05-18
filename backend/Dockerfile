@@ -4,6 +4,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+# Make sure npm binaries are in the PATH
+ENV PATH /app/node_modules/.bin:$PATH
 CMD ["npm", "run", "dev"]
 
 # Production build

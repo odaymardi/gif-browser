@@ -5,6 +5,8 @@
     RUN npm install
     COPY . .
     EXPOSE 5173
+    # Make sure npm binaries are in the PATH
+    ENV PATH /app/node_modules/.bin:$PATH
     CMD ["npm", "run", "dev"]
     
     # ---------- Production ----------
@@ -15,4 +17,3 @@
     
     FROM nginx:alpine as prod
     COPY --from=build /app/dist /usr/share/nginx/html
-    

@@ -7,12 +7,14 @@ services:
       target: dev
     volumes:
       - ./backend:/app
+      # Prevent node_modules from being overwritten by the host volume
+      - /app/node_modules 
     ports:
       - '3001:3001'
     environment:
       - PORT=3001
       - NODE_ENV=development
-    command: npx nodemon src/server.ts
+    command: nodemon src/server.ts
     networks:
       - app-network
 
@@ -22,6 +24,8 @@ services:
       target: dev
     volumes:
       - ./frontend:/app
+      # Prevent node_modules from being overwritten by the host volume
+      - /app/node_modules
     ports:
       - '5173:5173'
     environment:
